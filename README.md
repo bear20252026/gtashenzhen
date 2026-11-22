@@ -26,6 +26,7 @@ npm run dev
 
 - **可玩页面**：<https://bear20252026.github.io/gtashenzhen/>
 - **房间封面**：<https://bear20252026.github.io/gtashenzhen/room.html>
+- **总馆入口**：<https://bear20252026.github.io/frontier-atlas/#rooms>（第 10 个房间）
 - **源码**：<https://github.com/bear20252026/gtashenzhen>
 
 ## 目录结构
@@ -46,7 +47,7 @@ docs/architecture.md    拆分方法、符号映射、代码地图、验证记�
 
 ## 可以改什么
 
-- **场景/玩法**：`src/game.js`。搜索 `loadmsg`、`city.json`、`astronaut.glb`、`/models/cars/` 等字符串即可定位对应区块；文件开头有区块行号索引。
+- **场景/玩法**：`src/game.js`。搜索 `loadmsg`、`city.json`、`astronaut.glb`、`./models/cars/` 等字符串即可定位对应区块；文件开头有区块行号索引。
 - **页面与 HUD**：`index.html` + `styles.css`，DOM id 与原版一致。
 - **渲染器/加载器**：`src/three.js` 是三方库副本，一般不要改；要升级 three 时，建议改成 npm 依赖并保留 `game.js` 顶部的具名导入。
 - **城市数据**：`city.json`。结构见 `docs/architecture.md`，替换数据时保持同 schema。
