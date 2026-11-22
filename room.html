@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GTA Shenzhen — Frontier</title>
+  <meta name="description" content="GTA Shenzhen: a re-editable Three.js reconstruction of a real OSM Shenzhen, with 83,182 buildings and 62,088 roads." />
+  <meta name="theme-color" content="#f4f2ed" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23f4f2ed%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%225%22 fill=%22%23d84f2b%22/%3E%3C/svg%3E" />
+  <script>if (location.search.indexOf("embed=1") >= 0) document.documentElement.classList.add("embed");</script>
+  <style>
+    :root {
+      --paper: #f4f2ed;
+      --ink: #1b1a17;
+      --muted: #716d64;
+      --hair: #d8d4ca;
+      --accent: #d84f2b;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --sans: "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .page { max-width: 1320px; margin: 0 auto; padding: 0 34px 52px; }
+    .mast { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 27px 0 19px; border-bottom: 1px solid var(--hair); }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+    .brand i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent); }
+    .mast nav { display: flex; gap: 22px; font-family: var(--mono); font-size: 10px; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); }
+    .mast nav a { text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 3px; }
+    .mast nav a:hover { color: var(--ink); border-color: var(--ink); }
+    .hero { padding: 74px 0 36px; }
+    .eyebrow { margin: 0; font-family: var(--mono); font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+    h1 { margin: 22px 0 20px; font-size: clamp(58px, 9.2vw, 132px); line-height: .87; letter-spacing: -.06em; font-weight: 400; }
+    h1 em { color: var(--accent); font-style: normal; }
+    .lead { max-width: 65ch; margin: 0; font-size: 15px; line-height: 1.75; color: #55534b; }
+    .lead b { color: var(--ink); font-weight: 500; }
+    .stats { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 25px; }
+    .stats span { padding: 7px 10px; border: 1px solid var(--hair); border-radius: 999px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .35px; color: var(--muted); background: rgba(255,255,255,.32); }
+    .stats b { color: var(--ink); font-weight: 500; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .enter { display: inline-flex; align-items: center; gap: 9px; padding: 11px 14px; border-radius: 999px; background: var(--ink); color: #fff; text-decoration: none; font-family: var(--mono); font-size: 10px; letter-spacing: .45px; text-transform: uppercase; }
+    .enter:hover { background: var(--accent); }
+    .source { display: inline-flex; align-items: center; padding: 11px 2px; font-family: var(--mono); font-size: 10px; letter-spacing: .35px; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--hair); }
+    .source:hover { color: var(--ink); border-color: var(--ink); }
+    .frame { margin: 0; border-top: 1px solid var(--ink); padding-top: 18px; }
+    .frame img { display: block; width: 100%; height: auto; border-radius: 20px; box-shadow: 0 0 0 1px rgba(20,20,22,.07), 0 30px 50px -38px rgba(40,34,20,.7); }
+    figcaption { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-family: var(--mono); font-size: 9px; letter-spacing: .35px; text-transform: uppercase; color: var(--muted); }
+    .foot { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--mono); font-size: 9.5px; line-height: 1.7; letter-spacing: .3px; color: var(--muted); }
+    .foot a { text-decoration: none; border-bottom: 1px solid var(--hair); }
+    .foot a:hover { border-color: var(--ink); color: var(--ink); }
+    html.embed .mast, html.embed .lead, html.embed .stats, html.embed .actions, html.embed .foot, html.embed figcaption { display: none; }
+    html.embed .page { padding: 0 18px 24px; }
+    html.embed .hero { padding: 24px 0 14px; }
+    html.embed h1 { margin: 10px 0 0; font-size: 42px; letter-spacing: -.05em; }
+    html.embed .eyebrow { font-size: 8px; }
+    html.embed .frame { border-top: 0; padding-top: 12px; }
+    html.embed .frame img { border-radius: 14px; }
+    @media (max-width: 900px) {
+      .page { padding: 0 20px 36px; }
+      .hero { padding-top: 52px; }
+      h1 { font-size: clamp(50px, 12vw, 92px); }
+      .mast nav { gap: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div class="brand"><i></i>Frontier</div>
+      <nav>
+        <a href="https://bear20252026.github.io/frontier-atlas/">Atlas</a>
+        <a href="https://github.com/bear20252026/gtashenzhen">GitHub ↗</a>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Room 09 · GTA Shenzhen · 1 playable city · 2026</p>
+        <h1>The city,<br /><em>playable.</em></h1>
+        <p class="lead">A re-editable Three.js reconstruction of <b>gtashenzhen.com</b>: real Shenzhen OSM data, <b>83,182 buildings</b>, <b>62,088 roads</b>, 53 GLB assets and a single playable city. Fly, walk, drive, search a landmark, switch to night, or launch the light show.</p>
+        <div class="stats">
+          <span><b>83,182</b> buildings</span>
+          <span><b>62,088</b> roads</span>
+          <span><b>15,093</b> areas</span>
+          <span><b>53</b> GLB assets</span>
+          <span><b>7.1M</b> triangles</span>
+          <span>v0.5.0</span>
+        </div>
+        <div class="actions">
+          <a class="enter" href="./index.html">Enter the city ↗</a>
+          <a class="source" href="https://github.com/bear20252026/gtashenzhen">Source &amp; build notes ↗</a>
+        </div>
+      </section>
+      <figure class="frame">
+        <img src="./cover-day.jpg" alt="GTA Shenzhen day view: OSM buildings, roads and the Ping An Finance Centre" loading="eager" decoding="async" />
+        <figcaption><span>Day view · 1280 × 800 · audit capture</span><span>OSM Shenzhen · Three.js · WebGL</span></figcaption>
+      </figure>
+    </main>
+    <footer class="foot">
+      <span>GTA Shenzhen · editable reconstruction · v0.5.0 · built by bear20252026</span>
+      <span>Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · ODbL</span>
+    </footer>
+  </div>
+</body>
+</html>

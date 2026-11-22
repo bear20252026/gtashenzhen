@@ -1,0 +1,15 @@
+{
+  "name": "gtashenzhen-editable",
+  "private": true,
+  "version": "0.5.0",
+  "type": "module",
+  "description": "GTA Shenzhen 线上 bundle 的二次可编辑重建工程",
+  "scripts": {
+    "start": "node tools/serve.js 8899",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}
